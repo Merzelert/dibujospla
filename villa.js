@@ -1,37 +1,38 @@
 var vm = document.getElementById("villamerz");
 var papel = vm.getContext("2d");
-var mapa = "tile.webp"
 
-var fondo = new Image();
-fondo.src = mapa; 
-fondo.addEventListener("load", dibujar);
+var fondo = {
+    url: "tile.webp",
+    cargaOK: false
+};
 
-var vaca = new Image();
-vaca.src = "vaca.webp";
-vaca.addEventListener("load", dibujarVaca);
+var vaca = {
+    url: "vaca.webp",
+    cargaOK: false
+};
 
-var pollo = new Image();
-pollo.src = "pollo.webp";
-pollo.addEventListener("load", dibujarPollo);
+fondo.imagen = new Image();
+fondo.imagen.src = fondo.url; 
+fondo.imagen.addEventListener("load", cargarFondo);
 
-var cerdo = new Image();
-cerdo.src = "cerdo.webp";
-cerdo.addEventListener("load", dibujarCerdo);
+vaca.imagen = new Image();
+vaca.imagen.src = vaca.url;
+vaca.imagen.addEventListener("load", cargarVaca);
 
-function dibujar() {
-    papel.drawImage(fondo, 0, 0);
+function cargarFondo() {
+    fondo.cargaOK = true;
+    dibujar();
 }
 
-function dibujarVaca() {
-    papel.drawImage(vaca, 10, 10);
+function cargarVaca() {
+    vaca.cargaOK = true;
+    dibujar();
 }
 
-function dibujarPollo() {
-    papel.drawImage(pollo, 50, 50);
-}
-
-function dibujarCerdo() {
-    papel.drawImage(cerdo, 100, 100);
+function dibujar(){
+    if (fondo.cargaOK == true){
+        papel.drawImage(fondo, 0, 0);
+    }
 }
 
 function aleatorio(min, maxi) {
